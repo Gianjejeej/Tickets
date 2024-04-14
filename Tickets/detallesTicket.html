@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <header>
+    <div class="user-box">
+      <img src="usuario.png" alt="Usuario">
+      <span>Esteban Moral</span>
+    </div>
+  </header>
+  
+  <main>
+    <div class="welcome-box">
+      <p>Bienvenidos correos ticket</p>
+    </div>
+    
+    <section class="ticket-details">
+      <h2>Detalle del Ticket</h2>
+      <div class="yellow-box">
+        <dl>
+          <dt>ID Solicitud:</dt>
+          <dd id="ticket-id"></dd>
+          
+          <dt>Sector:</dt>
+          <dd id="ticket-sector"></dd>
+          
+          <dt>Fecha:</dt>
+          <dd id="ticket-fecha"></dd>
+          
+         
+          <dt>Nombre Completo:</dt>
+          <dd id="nombre_completo"></dd>
+
+           <dt>E-mail:</dt>
+           <dd id="e-mail"></dd>
+
+          <dt>Teléfono:</dt>
+          <dd id="telefono"></dd>
+
+           <dt>Solicitud:</dt>
+           <dd id="solicitud"></dd>
+
+           <dt>Estado:</dt>
+           <dd id="estado"></dd>
+
+            <dt>Nivel de Urgencia:</dt>
+            <dd id="nivel_urgencia"></dd>
+
+
+          
+          
+        </dl>
+      </div>
+    </section>
+    
+    <section class="assign-ticket">
+      <h2>Asignar Ticket</h2>
+      <div class="assign-form">
+        <label for="assigned-person">Personal Asignado:</label>
+        <select id="assigned-person">
+          <!-- Options will be populated via JavaScript from JSON -->
+        </select>
+        <button id="assign-button">Asignar</button>
+        <button id="cancel-button">Cancelar</button>
+      </div>
+    </section>
+  </main>
+  
+  
+  
+  <script src="script.js"></script>
+</body>
+</html>

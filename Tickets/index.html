@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets - Sistema de Solicitudes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Sistema de Solicitudes</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Tickets</a></li>
+        <li><a href="#">Correos</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="welcome">
+      <h2>Bienvenido Esteban Moral</h2>
+    </section>
+    
+    <section class="filter">
+      <h2>Filtrar por Fecha</h2>
+      <input type="date" id="filter-date">
+      <button onclick="filterByDate()">Filtrar</button>
+    </section>
+    
+    <section class="tickets">
+      <h2>Tickets Asignados</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Solicitud</th>
+            <th>Sector</th>
+            <th>Fecha Solicitud</th>
+            <th>Asignar</th>
+          </tr>
+        </thead>
+        <tbody id="tickets-body">
+        </tbody>
+      </table>
+    </section>
+    
+   
+    
+    <script>
+      function convertDateFormat(date) {
+        const [day, month, year] = date.split('-');
+        return `${year}-${month}-${day}`;
+      }
+
+      const tickets = [
+        { id: '157846', sector: 'Contabilidad', fecha: '14-10-2020', nombreCompleto: 'Marco Polo', email: 'marcoPolo@empresa.com', 
+         telefono: '+56925489635', solicitud: 'Solicito que en el area de contabilidad instalar un nuevo programa', estado: 'proceso', nivelUrgencia: 'Alto' },
+
+        { id: '175452', sector: 'Movistar', fecha: '12-10-2020', nombreCompleto: 'Gianluca Guajardo', email: 'gianlucass@empresa.com', 
+         telefono: '+56927289635', solicitud: 'Solicito asesoria para la instalación de un sistema', estado: 'proceso', nivelUrgencia: 'Alto' },
+
+        { id: '2432432', sector: 'Pc factory', fecha: '30-09-2020', nombreCompleto: 'Kevin perez', email: 'chilenoDeCorazon@empresa.com', 
+         telefono: '+56924499635', solicitud: 'Solicito atencion de Hadware para los equipos', estado: 'proceso', nivelUrgencia: 'Bajo'},
+
+        { id: '15432432', sector: 'Contabilidad', fecha: '30-09-2020', nombreCompleto: 'Humberto Garetto', email: 'Garetto@gmail.com', 
+         telefono: '+56927789635', solicitud: 'Solicito soporte de software en el area de contabilidad', estado: 'proceso', nivelUrgencia: 'Alta'},
+
+        { id: '174324', sector: 'RR.HH', fecha: '30-09-2020', nombreCompleto: 'limber choque', email: 'choque@gmail.com', 
+         telefono: '+56955489835', solicitud: 'Solicito soporte en recursos humanos', estado: 'proceso', nivelUrgencia: 'Alta' },
+
+        { id: '242345', sector: 'Sony Corporation', fecha: '02-10-2020', nombreCompleto: 'Diego Ramirez', email: 'Rimirez@gmail.com', 
+         telefono: '+56955489835', solicitud: 'Solicito asesoria para la solución del mal funcionamiento del software de ventas', estado: 'proceso', nivelUrgencia: 'Alta'  },
+
+        { id: '1132146', sector: 'Contabilidad', fecha: '10-10-2020', nombreCompleto: 'Sebastian galindo', email: 'sabastian@gmail.com', 
+         telefono: '+56979489835', solicitud: 'Solicito ayuda con el nuevo software contable', estado: 'proceso', nivelUrgencia: 'medio'  },
+
+        { id: '154316', sector: 'Contabilidad', fecha: '10-10-2020', nombreCompleto: 'Pedro Henriquez', email: 'Phern@gmail.com', 
+         telefono: '+56979489835', solicitud: 'Solicito ayuda en contabilidad en cuanto a mi software', estado: 'proceso', nivelUrgencia: 'Alta' },
+
+        { id: '17432', sector: 'RR.HH', fecha: '10-10-2020', nombreCompleto: 'Cristiano Ronaldo', email: 'Ronaldo@gmail.com', 
+         telefono: '+56979989735', solicitud: 'Solicito ayuda en recursos humanos', estado: 'proceso', nivelUrgencia: 'Alta' }	
+      ];
+
+      tickets.forEach(ticket => {
+        ticket.fecha = convertDateFormat(ticket.fecha);
+      });
+
+      function generateTable(tickets) {
+        const ticketsBody = document.getElementById('tickets-body');
+        ticketsBody.innerHTML = '';
+
+        tickets.forEach(ticket => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${ticket.id}</td>
+            <td>${ticket.sector}</td>
+            <td>${ticket.fecha}</td>
+            <td>${ticket.nombreCompleto}</td>
+            <td><button onclick="showTicketDetails('${ticket.id}', '${ticket.sector}', '${ticket.fecha}','${ticket.nombreCompleto}','${ticket.email}','${ticket.telefono}','${ticket.solicitud}','${ticket.estado}','${ticket.nivelUrgencia}')">Asignar</button></td>
+          `;
+          ticketsBody.appendChild(row);
+        });
+      }
+
+      function filterByDate() {
+        const filterDate = document.getElementById('filter-date').value;
+
+        // Filtrar los tickets por la fecha seleccionada
+        const filteredTickets = tickets.filter(ticket => ticket.fecha === filterDate || filterDate === '');
+
+        // Actualizar la tabla con los tickets filtrados
+        generateTable(filteredTickets);
+      }
+
+      function showTicketDetails(id, sector, fecha, nombreCompleto, email, telefono, solicitud, estado, nivelUrgencia) {
+        // Al hacer clic en "Asignar", redirecciona a la página de detalles del ticket
+        window.location.href = `detallesTicket.html?id=${id}&sector=${sector}&fecha=${fecha}&nombreCompleto=${nombreCompleto}&email=${email}&telefono=${telefono}&solicitud=${solicitud}&estado=${estado}&nivelUrgencia=${nivelUrgencia}`;
+      }
+
+      // Generar la tabla inicialmente con todos los tickets
+      generateTable(tickets);
+    </script>
+  </body>
+</html>
